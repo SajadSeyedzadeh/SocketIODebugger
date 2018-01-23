@@ -5,7 +5,7 @@ Simple Socket.IO debug tool for developers
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Run the following command to get copy of the project up and running on your local machine for development.
 
 ```
 git clone https://github.com/SajadSeyedzadeh/SocketIODebugger.git
