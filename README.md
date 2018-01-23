@@ -33,7 +33,7 @@ If you found any bug, Feel free to make issue for further details.
 
 ## Authors
 
-* **Sajad Seyedzadeh** - *Initial work* - [SajadSeyedzadeh](https://github.com/SajadSeyedzadeh)
+* **Sajad Seyedzadeh** - *Developer and Maintainer* - [SajadSeyedzadeh](https://github.com/SajadSeyedzadeh)
 
 
 ## License
