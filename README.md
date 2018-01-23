@@ -13,14 +13,16 @@ git clone https://github.com/SajadSeyedzadeh/SocketIODebugger.git
 
 ### Prerequisites
 
-You need to install latest version of NPM in order to run this project.
+You need to install npm and bower in order to run this project.
 
 
 ### Installing
 
-Install dependecies by running following command:
+Install dependencies by running following commands:
 ```
 npm install
+cd assets/
+bower install
 ```
 Start Application by :
 ```
