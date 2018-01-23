@@ -1,0 +1,18 @@
+{
+  "name": "socket-io-debugger",
+  "version": "1.0.0",
+  "description": "Socket IO Testing utility",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Sajad Seyedzadeh",
+  "license": "mit",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  },
+  "dependencies": {
+    "electron-json-storage": "^4.0.2",
+    "nedb": "^1.8.0"
+  }
+}

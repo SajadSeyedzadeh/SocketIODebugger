@@ -1,0 +1,23 @@
+{
+  "name": "socketIODebugger",
+  "homepage": "https://github.com/SajadSeyedzadeh/SocketIODebugger",
+  "authors": [
+    "SajadSeyedzadeh <sajadseyyedzadeh@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "remodal": "^1.1.1",
+    "material-design-lite": "^1.3.0"
+  }
+}

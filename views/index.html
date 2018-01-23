@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Socket IO Debugger</title>
+
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
+  <script src="../assets/vendor/jquery/dist/jquery.js"></script>
+  <script src="../app/config.js"></script>
+  <script src="../assets/vendor/toastr/toastr.min.js"></script>
+  <script src="../assets/vendor/material-design-lite/material.min.js"></script>
+  <script src="../assets/vendor/remodal/dist/remodal.min.js"></script>
+  <!-- Insert this line after script imports -->
+  <script>
+    if (window.module) module = window.module;
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/vendor/material-design-lite/material.min.css">
+  <link rel="stylesheet" href="../assets/css/MaterialIcons.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/vendor/toastr/toastr.min.css">
+  <link rel="stylesheet" href="../assets/vendor/remodal/dist/remodal.css">
+  <link rel="stylesheet" href="../assets/vendor/remodal/dist/remodal-default-theme.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+  <div class="container">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Socket IO Debugging Utility</span>
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#scroll-tab-general" class="mdl-layout__tab is-active">General</a>
+          <a href="#scroll-tab-favorites" class="mdl-layout__tab">Favorites</a>
+          <a href="#scroll-tab-history" class="mdl-layout__tab">History</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">About</span>
+        <p>Simple Socket.IO Debugging tool to use</p>
+        <span class="mdl-layout-title">Version</span>
+        <p>Alpha 0.1.0</p>
+        <span class="mdl-layout-title">Developer</span>
+        <p>Sajad Seyedzadeh <a target="_blank" href="https://github.com/SajadSeyedzadeh">@SajadSeyedzadeh</a></p>
+      </div>
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="scroll-tab-general">
+          <div class="page-content">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col intro-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <h5 class="text-center">Welcome to Socket.IO Debugging Utility</h5>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet connection-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text text-center">Connection</h2>
+                </div>
+                <div class="mdl-card__actions">
+                  <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+                    <input class="mdl-textfield__input" value="http://localhost:3000" type="text" id="txt-socket-url">
+                    <label class="mdl-textfield__label" for="txt-socket-url">URL...</label>
+                  </div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  URL for initializing a connection to server.
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <button id="btn-connect-socket" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Connect
+                  </button>
+                  <button id="btn-disconnect-socket" disabled="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Disconnect
+                  </button>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet event-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text text-center">Events</h2>
+                </div>
+                <div class="mdl-card__actions">
+                  <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+                    <input class="mdl-textfield__input" value="test:socket" type="text" id="txt-event-name">
+                    <label class="mdl-textfield__label" for="txt-event-name">Event name...</label>
+                  </div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  Event name to send message
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <button id="btn-send-message" disabled class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Send
+                  </button>
+                  <a id="btn-event-params" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="#params-modal">Param(s)</a>
+                  <a id="btn-event-reponses" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="#event_reponse_preview_modal">Response(s)</a>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--12-col logs-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">Logs</div>
+                <div class="mdl-card__actions">
+                  <ul id="lst-logs-list" class="logs-list-item mdl-list">
+                    <li>
+                      <span class="text-center">No log to view here...</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  Logs for connection, events and listener are goes here.
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <button id="btn-clear-all-log" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-favorites">
+          <div class="page-content">
+            <!-- Your content goes here -->
+          </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-history">
+          <div class="page-content">
+            <!-- Your content goes here -->
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="remodal param-modal" data-remodal-id="params-modal">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <h3>Event Param(s)</h3>
+    <div class="param-tab-container">
+      <div class="mdl-tabs mdl-js-tabs">
+        <div class="mdl-tabs__tab-bar">
+          <a href="#param-panel-object" class="mdl-tabs__tab is-active">Object Editor</a>
+          <a href="#param-panel-raw" class="mdl-tabs__tab">Object</a>
+        </div>
+
+        <div class="mdl-tabs__panel is-active" id="param-panel-object">
+          <div class="mdl-grid">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+              <input class="mdl-textfield__input" type="text" id="txt-event-name-store">
+              <label class="mdl-textfield__label" for="txt-event-name-store">Event Name(Optional)</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet">
+              <input class="mdl-textfield__input" type="text" id="txt-param-key">
+              <label class="mdl-textfield__label" for="txt-param-key">Key</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet">
+              <input class="mdl-textfield__input" type="text" id="txt-param-value">
+              <label class="mdl-textfield__label" for="txt-param-value">Value</label>
+            </div>
+          </div>
+          <div class="param-action-button-container">
+            <button id="btn-add-item-to-param" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Add
+            </button>
+            <button id="btn-save-all-params" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+              Export
+            </button>
+            <a href="#param-import-modal" id="btn-import-all-params" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+              Import
+            </a>
+            <button id="btn-clear-db" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+              Clear Database
+            </button>
+            <button id="btn-clear-all-params" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+              Clear All
+            </button>
+          </div>
+          <ul id="lst-param" class="param-list-icon mdl-list">
+            <li class="mdl-list__item">
+              <span class="mdl-list__item-primary-content">
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+                  Add
+                </button>
+                No Item In List
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mdl-tabs__panel" id="param-panel-raw">
+          <h2><i class="material-icons" style="font-size:40px;">warning</i></h2>
+          <h6>Use this feature for huge JSON objects, Otherwise use Object Editor.</h6>
+          <textarea id="ta-import-from-json-doc" cols="30" rows="10"></textarea>
+          <button id="btn-import-from-json-doc" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+            Import from Raw JSON (Use with caution)
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+    <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+  </div>
+  <div class="remodal" data-remodal-id="param-import-modal">
+    <div class="light-modal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h3>Import Param(s)</h3>
+      <div id="lst-params-import" class="param-import-list-action mdl-list">
+
+      </div>
+      <br>
+      <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <a href="#params-modal" class="remodal-confirm">OK</a>
+    </div>
+  </div>
+  <div class="remodal event-reponse-preview-modal" data-remodal-id="event_reponse_preview_modal">
+    <div class="light-modal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h3 id="header-event-reponse-preview">Event Response Preview</h3>
+      <div id="event-response-preview-content">
+
+      </div>
+      <br>
+      <button id="btn-clear-all-response" class="remodal-cancel">Clear</button>
+      <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+    </div>
+  </div>
+  <script>
+    var renderer = require('../renderer.js')
+  </script>
+  <script src="../assets/js/socket.io.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

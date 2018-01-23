@@ -1,0 +1,184 @@
+body {
+    background-color: #f0f0f0;
+    background-size: 100% 100%;
+    font-family: 'Istok Web', sans-serif;
+}
+.mdl-layout__tab-bar-button,.mdl-layout__tab-bar
+{
+    background-color: transparent;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input {
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.intro-card-wide>.mdl-card__title {
+    color: rgb(32, 32, 32);
+    height: 100%;
+    background-image: linear-gradient(to bottom, #832a39 0%, #e95151 100%);
+
+}
+.connection-container label {
+    color: white;
+}
+
+.mdl-textfield--floating-label .mdl-textfield__label {
+    color: white;
+}
+
+::selection {
+    background: #dadada;
+    text-shadow: none;
+}
+
+.mdl-layout__header {
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #292929 0%, #161616 100%);
+}
+
+.connection-card-wide>.mdl-card__title {
+    color: rgb(29, 29, 29);
+    height: 176px;
+    background-image: linear-gradient(to bottom, #3261f1 0%, #00bebe 100%);
+}
+.connection-card-wide .mdl-card__title-text {
+    color:white;
+}
+.connection-card-wide>.mdl-card__title>h2 {
+    width: 100%;
+    padding: 2px;
+}
+
+.connection-card-wide>.mdl-card__menu {
+    color: rgb(53, 53, 53);
+}
+.mdl-layout__drawer {
+    border-right-width: 0px;
+    background-image: linear-gradient(to bottom, #292929 0%, #131313 100%);
+    color: rgb(231, 231, 231);
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.5);
+}
+.mdl-layout__drawer p {
+    padding:10px;
+}
+
+/* Event Card */
+
+.event-card-wide>.mdl-card__title {
+    color: rgb(29, 29, 29);
+    height: 176px;
+    background-image: linear-gradient(to bottom, #574ceb 0%, #5c2dca 100%);
+}
+.event-card-wide .mdl-card__title-text {
+    color:white;
+}
+.event-card-wide>.mdl-card__title>h2 {
+    width: 100%;
+    padding: 2px;
+}
+
+.event-card-wide>.mdl-card__menu {
+    color: rgb(53, 53, 53);
+}
+
+.param-modal {
+    background-color: #303030 !important;
+}
+
+.param-tab-container .mdl-tabs__tab {
+    color: rgba(214, 214, 214, 0.87);
+}
+
+.param-tab-container .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+    color: white;
+}
+
+.param-tab-container input[type='text'],
+.param-tab-container .mdl-textfield__label {
+    color: white;
+}
+
+.param-tab-container ul,
+.param-tab-container li {
+    color: white;
+}
+
+.param-tab-container .mdl-list__item {
+    padding: 0;
+}
+
+.light-modal h1,
+.light-modal h2,
+.light-modal h3,
+.light-modal h4,
+.light-modal h5,
+.light-modal h6 {
+    color: rgb(26, 26, 26);
+}
+
+.light-modal pre {
+    text-align: left;
+}
+
+
+/* Syntax Highlighting */
+
+pre {
+    color: white;
+    background-color: #303030;
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+
+.string {
+    color: #8de855;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    font-size: 16px;
+    color: rgb(239, 220, 80);
+}
+
+.event-response {
+    color: rgb(161, 0, 0);
+}
+
+#lst-logs-list {
+    background-image: linear-gradient(to bottom, #292929 0%, #161616 100%);
+}
+
+#lst-logs-list li {
+    color: white;
+}
+
+#ta-import-from-json-doc {
+    background-color: #303030;
+    color: white;
+    width: 100%;
+}
